@@ -4,7 +4,7 @@ int fsize(FILE *);
 int meh(void)
 {
 	
-    char buffer[231535] = {0};  /* initialized to zeroes */
+    char buffer[231535] = {0};
     char buffer1[231535];
   
     int i,j,k,m;
@@ -46,6 +46,6 @@ int fsize(FILE *fp){
     int prev=ftell(fp);
     fseek(fp, 0L, SEEK_END);
     int sz=ftell(fp);
-    fseek(fp,prev,SEEK_SET); //go back to where we were
+    fseek(fp,prev,SEEK_SET);
     return sz;
 }

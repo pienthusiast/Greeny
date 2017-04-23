@@ -1,4 +1,3 @@
-// global1.c
 #include <stdio.h>
 #include <pthread.h>
 #include "LZW.h"
@@ -27,7 +26,6 @@ int main()
     pthread_create(&p1, NULL, thread1, NULL);
     pthread_create(&p2, NULL, thread2, NULL);
 	
-    // join waits for the threads to finish
     pthread_join(p1, NULL);
     pthread_join(p2, NULL);
     pthread_mutex_destroy(&myMutex);

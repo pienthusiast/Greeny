@@ -14,7 +14,7 @@ int meh(void)
     fstat(fd, &buf);
     int size = buf.st_size;
 	
-    char buffer[size] = {0};
+    char buffer[size];
     char buffer1[size];
 	
 	FILE *fs = fopen("Binaryswosh.bin","wb");

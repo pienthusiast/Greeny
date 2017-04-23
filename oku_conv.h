@@ -1,22 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
-int fsize(FILE *);
+
 int meh(void)
-{
-	
-    char buffer[231535] = {0};
-    char buffer1[231535];
+{  
   
     int i,j,k,m;
     FILE *fp = fopen("unixdict.txt", "rb");
-    int size = fsize(fp);
+    int fd = fileno(fp);
+    struct stat buf;
+    fstat(fd, &buf);
+    int size = buf.st_size;
+	
+    char buffer[size] = {0};
+    char buffer1[size];
+	
 	FILE *fs = fopen("Binaryswosh.bin","wb");
     if (fp == NULL) {
         perror("Failed to open file ");
         return EXIT_FAILURE;
     }
 
-    for (i = 0; i <= 231534; i++) {
+    for (i = 0; i <= (size-1); i++) {
         char rc = getc(fp);
         if (rc == EOF) {
             fputs("An error occurred while reading the file.\n", stderr);
@@ -27,7 +31,7 @@ int meh(void)
 
     fclose(fp);
     
-    for(k = 0; k <= 231534; k++)
+    for(k = 0; k <= (size-1); k++)
     {
 	int a = buffer[k];
 	itoa(a,buffer1,2);
@@ -37,15 +41,8 @@ int meh(void)
 	
     /*for(j = 0; j <= (231534) ; j++){
     printf("Value that has been read...%x\n", buffer[j]);
-	}
+	}*/
     fclose(fs);
-    printf("%d",size);*/
+
     return EXIT_SUCCESS;
-}
-int fsize(FILE *fp){
-    int prev=ftell(fp);
-    fseek(fp, 0L, SEEK_END);
-    int sz=ftell(fp);
-    fseek(fp,prev,SEEK_SET);
-    return sz;
 }
